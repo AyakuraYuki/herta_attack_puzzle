@@ -3,7 +3,7 @@
 #include <vector>
 
 using hp = long long; // 声明血量的类型别名
-using hp_pair = std::pair<hp, hp>; // 声明血量信息类型，first是当前血量，second是初始血量
+using hp_pair = std::pair<long long, long long>; // 声明血量信息类型，first是当前血量，second是初始血量
 
 /// 黑塔攻击
 ///
@@ -11,7 +11,7 @@ using hp_pair = std::pair<hp, hp>; // 声明血量信息类型，first是当前�
 /// 
 /// @param enemy_hp_vector 一组敌人的血量
 /// @return 最小普攻次数
-hp minimum_normal_attack(std::vector<hp> enemy_hp_vector) {
+long long minimum_normal_attack(std::vector<hp> enemy_hp_vector) {
     long long normal_attack_count = 0; // 普攻次数
     const unsigned enemy_count = enemy_hp_vector.size(); // 敌人总数
 
@@ -21,7 +21,7 @@ hp minimum_normal_attack(std::vector<hp> enemy_hp_vector) {
         enemies.emplace_back(enemy_hp_vector[i], enemy_hp_vector[i]);
     }
 
-    hp aoe_attack = 0; // 已触发的 AOE 攻击次数
+    long long aoe_attack = 0; // 已触发的 AOE 攻击次数
 
     for (int i = 0; i < enemy_count; ++i) {
         auto &[current_health, maximum_health] = enemies[i];
@@ -66,8 +66,8 @@ int main() {
         {3, {1, 3, 6}},
         {6, {5, 5, 5, 5, 5}},
     };
-    for (auto &[want, enemy_healthes]: cases) {
-        if (const hp got = minimum_normal_attack(enemy_healthes); got != want) {
+    for (auto &[want, enemy_health]: cases) {
+        if (const long long got = minimum_normal_attack(enemy_health); got != want) {
             std::cerr << "预期普通次数是" << want << "但得到的普攻次数是" << got << std::endl;
             return 1;
         }
